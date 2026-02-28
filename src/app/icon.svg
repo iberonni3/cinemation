@@ -1,0 +1,31 @@
+<svg 
+    width="32" 
+    height="32" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+>
+    {/* Background Frame */}
+    <rect 
+        x="2" 
+        y="5" 
+        width="20" 
+        height="14" 
+        rx="2" 
+        stroke="white" 
+        stroke-width="1.5" 
+    />
+    
+    {/* Sprocket holes - top */}
+    <rect x="5" y="7" width="2" height="2" rx="0.5" fill="white" />
+    <rect x="11" y="7" width="2" height="2" rx="0.5" fill="white" />
+    <rect x="17" y="7" width="2" height="2" rx="0.5" fill="white" />
+    
+    {/* Sprocket holes - bottom */}
+    <rect x="5" y="15" width="2" height="2" rx="0.5" fill="white" />
+    <rect x="11" y="15" width="2" height="2" rx="0.5" fill="white" />
+    <rect x="17" y="15" width="2" height="2" rx="0.5" fill="white" />
+    
+    {/* Minimalist dot/lens center */}
+    <circle cx="12" cy="12" r="1.5" fill="white" opacity="0.8" />
+</svg>

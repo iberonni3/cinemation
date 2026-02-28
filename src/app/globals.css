@@ -1,0 +1,292 @@
+/* ============================================================
+   CINEMATION — Global Design System
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+
+/* ── CSS Custom Properties ── */
+:root {
+  --black: #080808;
+  --off-white: #F0EDE8;
+  --warm-gray: #2A2825;
+  --champagne: #C9A96E;
+  --crimson: #8B1A1A;
+  --grain-opacity: 0.038;
+
+  /* typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* timing */
+  --ease-cinema: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-slow: 1.2s;
+  --dur-mid: 0.8s;
+  --dur-fast: 0.5s;
+
+  /* z-layers */
+  --z-base: 1;
+  --z-nav: 100;
+  --z-overlay: 500;
+  --z-cursor: 1000;
+  --z-grain: 9999;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: auto;
+  /* Lenis handles this */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  cursor: none;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Typography Scale ── */
+.t-hero {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(4rem, 12vw, 13rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+.t-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 8vw, 9rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+
+.t-kinetic {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 6vw, 7rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.t-label {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+}
+
+.t-nav {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ── Film Grain (static layer via inline canvas) ── */
+#film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+}
+
+/* ── Velocity Blur Overlay ── */
+#velocity-blur {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-grain) - 1);
+  pointer-events: none;
+  transition: backdrop-filter 0.08s ease;
+  backdrop-filter: blur(0px);
+}
+
+/* ── Light Leak ── */
+.light-leak {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+      transparent 0%,
+      rgba(201, 169, 110, 0.12) 40%,
+      rgba(240, 237, 232, 0.06) 55%,
+      transparent 100%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transform: translateX(-110%);
+  will-change: transform;
+}
+
+/* ── Keyframe Library ── */
+@keyframes blurFadeIn {
+  from {
+    filter: blur(10px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes lightLeakSweep {
+  from {
+    transform: translateX(-110%);
+  }
+
+  to {
+    transform: translateX(210%);
+  }
+}
+
+@keyframes trackingExpand {
+  from {
+    letter-spacing: 0.4em;
+    opacity: 0;
+    filter: blur(6px);
+  }
+
+  to {
+    letter-spacing: 0.12em;
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes maskSlideIn {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes grain {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-2%, -3%);
+  }
+
+  20% {
+    transform: translate(2%, 1%);
+  }
+
+  30% {
+    transform: translate(-1%, 4%);
+  }
+
+  40% {
+    transform: translate(3%, -1%);
+  }
+
+  50% {
+    transform: translate(-3%, 2%);
+  }
+
+  60% {
+    transform: translate(1%, -4%);
+  }
+
+  70% {
+    transform: translate(4%, 1%);
+  }
+
+  80% {
+    transform: translate(-2%, 3%);
+  }
+
+  90% {
+    transform: translate(2%, -2%);
+  }
+}
+
+/* ── Utility Classes ── */
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.pointer-none {
+  pointer-events: none;
+}
+
+.select-none {
+  user-select: none;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}
