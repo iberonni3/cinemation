@@ -54,10 +54,10 @@ export default function SplitReveal() {
         <section
             ref={sectionRef}
             id="reel"
+            className="split-reveal-section"
             style={{
                 position: 'relative',
                 width: '100%',
-                height: '100vh',
                 display: 'flex',
                 overflow: 'hidden',
                 background: 'var(--black)',
@@ -66,12 +66,11 @@ export default function SplitReveal() {
             {/* Left — Video */}
             <div
                 ref={leftRef}
+                className="split-panel left"
                 style={{
                     position: 'relative',
-                    width: '60%',
-                    height: '100%',
                     overflow: 'hidden',
-                    background: '#0a0a0a', // Fallback
+                    background: '#0a0a0a',
                 }}
             >
                 <video
@@ -99,18 +98,17 @@ export default function SplitReveal() {
                 </video>
 
                 {/* Dark vignette right edge */}
-                <div style={{
+                <div className="edge-gradient" style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to right, transparent 70%, var(--black) 100%)',
                     pointerEvents: 'none',
                 }} />
 
                 {/* Caption bottom left */}
                 <div style={{
                     position: 'absolute',
-                    bottom: '2.5rem',
-                    left: '2.5rem',
+                    bottom: 'var(--mobile-padding)',
+                    left: 'var(--mobile-padding)',
                     zIndex: 2,
                 }}>
                     <p className="t-label">Showreel — 2024</p>
@@ -120,13 +118,11 @@ export default function SplitReveal() {
             {/* Divider */}
             <div
                 ref={dividerRef}
+                className="split-divider"
                 style={{
-                    width: '1px',
-                    height: '100%',
                     background: 'linear-gradient(to bottom, transparent, var(--champagne), transparent)',
                     opacity: 0,
                     flexShrink: 0,
-                    transformOrigin: 'top',
                     alignSelf: 'stretch',
                 }}
             />
@@ -134,10 +130,9 @@ export default function SplitReveal() {
             {/* Right — Kinetic Text */}
             <div
                 ref={rightRef}
+                className="split-panel right"
                 style={{
-                    flex: 1,
                     position: 'relative',
-                    height: '100%',
                     display: 'flex',
                     alignItems: 'center',
                     overflow: 'hidden',
@@ -148,8 +143,8 @@ export default function SplitReveal() {
                 {/* Top-right label */}
                 <div style={{
                     position: 'absolute',
-                    top: '2.5rem',
-                    right: '2.5rem',
+                    top: 'var(--mobile-padding)',
+                    right: 'var(--mobile-padding)',
                 }}>
                     <p className="t-label">Defining Our Craft</p>
                 </div>
@@ -157,6 +152,34 @@ export default function SplitReveal() {
 
             {/* Light leak overlay for the whole section */}
             <div className="light-leak absolute-fill" aria-hidden="true" />
+
+            <style>{`
+                .split-reveal-section {
+                    height: 100vh;
+                    flex-direction: row;
+                }
+                .split-panel.left { width: 60%; height: 100%; }
+                .split-panel.right { flex: 1; height: 100%; }
+                .split-divider { width: 1px; height: 100%; transform-origin: top; }
+                .edge-gradient { background: linear-gradient(to right, transparent 70%, var(--black) 100%); }
+
+                @media (max-width: 768px) {
+                    .split-reveal-section {
+                        height: auto;
+                        min-height: 100vh;
+                        flex-direction: column;
+                    }
+                    .split-panel.left { width: 100%; height: 45vh; }
+                    .split-panel.right { width: 100%; height: 55vh; }
+                    .split-divider { 
+                        width: 100%; 
+                        height: 1px; 
+                        transform-origin: left;
+                        background: linear-gradient(to right, transparent, var(--champagne), transparent) !important;
+                    }
+                    .edge-gradient { background: linear-gradient(to bottom, transparent 70%, var(--black) 100%); }
+                }
+            `}</style>
         </section>
     );
 }

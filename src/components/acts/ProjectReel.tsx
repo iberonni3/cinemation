@@ -99,7 +99,7 @@ export default function ProjectReel({ hideHeader = false }: ProjectReelProps) {
             {/* Section header */}
             {!hideHeader && (
                 <div ref={headerRef} style={{
-                    padding: '10vh 10vw 4vh',
+                    padding: 'clamp(4rem, 10vh, 10vh) var(--mobile-padding) 4vh',
                     borderTop: '1px solid rgba(240,237,232,0.06)',
                 }}>
                     <p className="t-label" style={{ marginBottom: '1rem', opacity: 0 }}>Selected Work</p>
@@ -174,8 +174,8 @@ export default function ProjectReel({ hideHeader = false }: ProjectReelProps) {
                         className="reel-number"
                         style={{
                             position: 'absolute',
-                            top: '3rem',
-                            right: '3rem',
+                            top: 'var(--mobile-padding)',
+                            right: 'var(--mobile-padding)',
                             fontFamily: 'var(--font-sans)',
                             fontSize: '0.65rem',
                             letterSpacing: '0.25em',
@@ -192,7 +192,8 @@ export default function ProjectReel({ hideHeader = false }: ProjectReelProps) {
                         style={{
                             position: 'relative',
                             zIndex: 2,
-                            padding: '0 10vw',
+                            padding: '0 var(--mobile-padding)',
+                            maxWidth: '1000px',
                         }}
                     >
                         {/* Category */}
@@ -258,9 +259,9 @@ export default function ProjectReel({ hideHeader = false }: ProjectReelProps) {
                     {/* Bottom subtitle strip */}
                     <div style={{
                         position: 'absolute',
-                        bottom: '2.5rem',
-                        left: '10vw',
-                        right: '10vw',
+                        bottom: 'var(--mobile-padding)',
+                        left: 'var(--mobile-padding)',
+                        right: 'var(--mobile-padding)',
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
@@ -273,6 +274,22 @@ export default function ProjectReel({ hideHeader = false }: ProjectReelProps) {
                     </div>
                 </div>
             ))}
+
+            <style>{`
+                @media (min-width: 768px) {
+                    .reel-title-card {
+                        padding: 0 10vw !important;
+                    }
+                    .reel-item .reel-number {
+                        top: 3rem !important;
+                        right: 3rem !important;
+                    }
+                    .reel-item div[style*="bottom"] {
+                        left: 10vw !important;
+                        right: 10vw !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 }

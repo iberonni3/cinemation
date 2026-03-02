@@ -98,9 +98,17 @@ export default function HeroAct() {
             }} aria-hidden="true" />
 
             {/* Content */}
-            <div style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
+            <div style={{
+                textAlign: 'center',
+                position: 'relative',
+                zIndex: 2,
+                padding: '0 var(--mobile-padding)',
+            }}>
                 {/* Label above */}
-                <p className="t-label" style={{ marginBottom: '2.5rem', opacity: 0.6 }}>
+                <p className="t-label" style={{
+                    marginBottom: 'clamp(1.5rem, 5vh, 2.5rem)',
+                    opacity: 0.6
+                }}>
                     Motion Design Studio
                 </p>
 
@@ -120,44 +128,49 @@ export default function HeroAct() {
                 {/* Separator */}
                 <div style={{
                     width: '1px',
-                    height: '40px',
+                    height: 'clamp(20px, 4vh, 40px)',
                     background: 'var(--champagne)',
-                    margin: '2.5rem auto',
+                    margin: 'clamp(1.5rem, 5vh, 2.5rem) auto',
                     opacity: 0.5,
                 }} aria-hidden="true" />
 
                 {/* Tagline */}
-                <p
-                    ref={tagline1Ref}
-                    style={{
-                        fontFamily: 'var(--font-serif)',
-                        fontWeight: 300,
-                        fontSize: 'clamp(1rem, 2.2vw, 1.6rem)',
-                        fontStyle: 'italic',
-                        color: 'var(--off-white)',
-                        opacity: 0,
-                        letterSpacing: '0.04em',
-                        lineHeight: 1.4,
-                    }}
-                >
-                    We don&apos;t cut footage.
-                </p>
-                <p
-                    ref={tagline2Ref}
-                    style={{
-                        fontFamily: 'var(--font-serif)',
-                        fontWeight: 300,
-                        fontSize: 'clamp(1rem, 2.2vw, 1.6rem)',
-                        fontStyle: 'italic',
-                        color: 'var(--champagne)',
-                        opacity: 0,
-                        letterSpacing: '0.04em',
-                        lineHeight: 1.4,
-                        marginTop: '0.3rem',
-                    }}
-                >
-                    We craft emotion.
-                </p>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.3rem',
+                }}>
+                    <p
+                        ref={tagline1Ref}
+                        style={{
+                            fontFamily: 'var(--font-serif)',
+                            fontWeight: 300,
+                            fontSize: 'clamp(1rem, 2.2vw, 1.6rem)',
+                            fontStyle: 'italic',
+                            color: 'var(--off-white)',
+                            opacity: 0,
+                            letterSpacing: '0.04em',
+                            lineHeight: 1.4,
+                        }}
+                    >
+                        We don&apos;t cut footage.
+                    </p>
+                    <p
+                        ref={tagline2Ref}
+                        style={{
+                            fontFamily: 'var(--font-serif)',
+                            fontWeight: 300,
+                            fontSize: 'clamp(1rem, 2.2vw, 1.6rem)',
+                            fontStyle: 'italic',
+                            color: 'var(--champagne)',
+                            opacity: 0,
+                            letterSpacing: '0.04em',
+                            lineHeight: 1.4,
+                        }}
+                    >
+                        We craft emotion.
+                    </p>
+                </div>
             </div>
 
             {/* Scroll hint */}

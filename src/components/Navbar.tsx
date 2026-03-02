@@ -20,9 +20,11 @@ export default function Navbar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '1.8rem 3rem',
-                mixBlendMode: 'difference',
-            }}>
+                padding: 'var(--mobile-padding) var(--mobile-padding)',
+                '@media (min-width: 768px)': {
+                    padding: '1.8rem 3rem',
+                }
+            } as any}>
                 {/* Wordmark → home */}
                 <TransitionLink
                     href="/"

@@ -30,6 +30,9 @@
   --z-overlay: 500;
   --z-cursor: 1000;
   --z-grain: 9999;
+  /* spacing */
+  --desktop-padding: 3rem;
+  --mobile-padding: 1.5rem;
 }
 
 /* ── Reset ── */
@@ -43,6 +46,11 @@
 
 html {
   font-size: 16px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+
   scroll-behavior: auto;
   /* Lenis handles this */
   -webkit-font-smoothing: antialiased;

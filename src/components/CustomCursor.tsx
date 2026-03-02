@@ -113,7 +113,19 @@ export default function CustomCursor() {
       }
     };
 
+    // Responsive check: Hide cursor on touch devices
+    const updateCursorVisibility = () => {
+      const isTouch = window.matchMedia('(hover: none)').matches;
+      if (dotRef.current) dotRef.current.style.display = isTouch ? 'none' : 'block';
+      if (ringRef.current) ringRef.current.style.display = isTouch ? 'none' : 'flex';
+      if (textRef.current) textRef.current.style.display = isTouch ? 'none' : 'flex';
+    };
+
+    updateCursorVisibility();
+    window.addEventListener('resize', updateCursorVisibility);
+
     const onDown = () => {
+      if (window.matchMedia('(hover: none)').matches) return;
       isClick = true;
       applyRingState();
       // Ripple
@@ -131,6 +143,7 @@ export default function CustomCursor() {
     };
 
     const onUp = () => {
+      if (window.matchMedia('(hover: none)').matches) return;
       isClick = false;
       applyRingState();
     };
@@ -144,6 +157,7 @@ export default function CustomCursor() {
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mousedown', onDown);
       document.removeEventListener('mouseup', onUp);
+      window.removeEventListener('resize', updateCursorVisibility);
       cancelAnimationFrame(rafId);
     };
   }, []);

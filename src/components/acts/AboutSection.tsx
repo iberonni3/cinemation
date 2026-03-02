@@ -67,7 +67,7 @@ export default function AboutSection() {
     return (
         <section id="about" ref={containerRef} style={{
             background: 'var(--black)',
-            padding: '12vh 10vw',
+            padding: '12vh var(--mobile-padding)',
             borderTop: '1px solid rgba(240,237,232,0.06)',
         }}>
             {/* Header */}
@@ -116,7 +116,7 @@ export default function AboutSection() {
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                gap: '4rem 3rem',
+                gap: 'clamp(2rem, 5vh, 4rem) 3rem',
             }}>
                 {PILLARS.map(({ num, title, body }) => (
                     <div key={num} className="pillar" style={{ opacity: 0 }}>
@@ -148,7 +148,7 @@ export default function AboutSection() {
             </div>
 
             {/* Contact CTA */}
-            <div id="contact" style={{
+            <div id="contact" className="contact-cta" style={{
                 marginTop: '10vh',
                 paddingTop: '6vh',
                 borderTop: '1px solid rgba(240,237,232,0.06)',
@@ -173,13 +173,14 @@ export default function AboutSection() {
                         <em style={{ color: 'var(--champagne)', fontStyle: 'italic' }}>Story.</em>
                     </h2>
                 </div>
-                <div>
+                <div style={{ minWidth: '240px' }}>
                     <a
                         href="mailto:hello@cinemation.studio"
                         data-cursor="hover"
                         className="t-label"
                         style={{
-                            display: 'inline-block',
+                            display: 'block',
+                            textAlign: 'center',
                             padding: '1rem 2.4rem',
                             border: '1px solid rgba(201,169,110,0.5)',
                             color: 'var(--champagne)',
@@ -202,6 +203,7 @@ export default function AboutSection() {
                         marginTop: '1rem',
                         opacity: 0.3,
                         fontSize: '0.6rem',
+                        textAlign: 'center',
                     }}>
                         hello@cinemation.studio
                     </p>
@@ -226,6 +228,17 @@ export default function AboutSection() {
                     Motion Design · Brand Films · Campaigns
                 </span>
             </div>
+
+            <style>{`
+                @media (min-width: 768px) {
+                    section#about {
+                        padding: 12vh 10vw !important;
+                    }
+                    .contact-cta {
+                        flex-wrap: nowrap !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 }
